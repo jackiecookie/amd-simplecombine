@@ -1,6 +1,6 @@
 {
   "name": "amd-simplecombine",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "amd模块合并",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,12 @@
   "homepage": "https://github.com/wspandihai/amd-simplecombine#readme",
   "devDependencies": {
     "mocha": "*",
-    "should": "~4.3.1",
+    "should": "~4.3.1"
+  },
+  "dependencies": {
+    "crequire": "^1.6.0",
+    "debug": "^2.2.0",
+    "exists-case": "^0.1.0",
+    "vinyl": "^0.5.1"
   }
 }
