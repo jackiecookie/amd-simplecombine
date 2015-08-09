@@ -1,6 +1,6 @@
 {
   "name": "amd-simplecombine",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "amd模块合并",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
     "crequire": "^1.6.0",
     "debug": "^2.2.0",
     "exists-case": "^0.1.0",
-    "vinyl": "^0.5.1"
+    "vinyl": "^0.5.1",
+    "uglify-js": "^2.4.24"
   }
 }

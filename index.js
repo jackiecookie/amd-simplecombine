@@ -6,6 +6,7 @@ var winPath = utils.winPath;
 var common = require('./common');
 var arr2str = utils.arr2str;
 var template = utils.template;
+var UglifyJS = require("uglify-js");
 
 var removedefineReg = /^\s*define[(].*?function.*?[)]\s*{?/;
 var removefooterTpl = /}[)];*\s*$/
@@ -68,7 +69,11 @@ function transFile(file, filePath) {
 		code, footerTpl
 	].join('\n');
 	//压缩
-	file.contents = new Buffer(html);
+	file.contents = new Buffer(minify ? UglifyJS.minify(html, {
+		fromString: true
+			// ,
+			// mangle: false
+	}).code : html);
 	file.isTransed = true;
 	return file;
 }
