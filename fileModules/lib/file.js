@@ -12,19 +12,20 @@ var debug = require('debug')('father:file');
 module.exports = File;
 
 File.require = function requireFile(src, pkg) {
-  var cache = pkg._files;
+  //var cache = pkg._files;
   src = tryFile(src);
   var fullpath = src;
-  if (fullpath in cache) {
-    debug('found %s in cache', fullpath);
-    return cache[fullpath];
-  }
+  //todo:这里的缓存去掉
+  // if (fullpath in cache) {
+  //   debug('found %s in cache', fullpath);
+  //   return cache[fullpath];
+  // }
   var file = new File({
     path: src,
     pkg: pkg
   });
   debug('save %s in cache', file.path);
-  return cache[file.path] = file;
+  return file; //cache[file.path] =
 };
 
 File.ignore = function ignoreFile(name) {

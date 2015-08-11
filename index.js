@@ -23,8 +23,7 @@ module.exports.parseAmdModule = function(moduleurls, option, fn) {
 	moduleurls.forEach(function(moduleurl) {
 		var filePath = winPath(join(pkg.dest, option.modules_path, moduleurl));
 		pkg.files.push(filePath);
-		requireFile(filePath, pkg);
-		var file = pkg.getfile(filePath);
+		var file = requireFile(filePath, pkg);
 		file = file.isTransed ? file : transFile(file, filePath);
 		if (bufCache) {
 			bufCache += file.contents.toString();
@@ -103,7 +102,6 @@ function initpkg(option) {
 	pkg.files = [];
 	this.pkg = pkg;
 	pkg.getfile = function(p) {
-		console.log(p);
 		return pkg._files[p];
 	}
 	pkg.removefile = function(p) {
