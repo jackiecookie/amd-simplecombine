@@ -41,7 +41,14 @@ module.exports.RemoveCache = function(path) {
 	if (pkg) pkg.removefile(path);
 }
 
-
+function BeautifyCode(code) {
+	var ast = UglifyJS.parse(code);
+	var stream = UglifyJS.OutputStream({
+		beautify: true
+	});
+	ast.print(stream);
+	return stream.toString();
+}
 
 //转换成标准的amd模块
 function transFile(file, filePath) {
@@ -52,8 +59,8 @@ function transFile(file, filePath) {
 	//获得可能存在的CSS引用 
 	common.setFileCssDepsToDeps(code, deps);
 	var id = common.transportId(file, pkg);
-	//去掉注释避免干扰
-	code = code.replace(/(?:^|\n|\r)\s*\/\*[\s\S]*?\*\/\s*(?:\r|\n|$)/g, '\n').replace(/(?:^|\n|\r)\s*\/\/.*(?:\r|\n|$)/g, '\n');
+	//BeautifyCode避免干扰
+	code = BeautifyCode(code);
 	//如果是标准amd模块去头去尾,重新构建,为了兼容非标准amd模块
 	var removedefineRegStr = code.match(removedefineReg)
 	if (removedefineRegStr != null) {
