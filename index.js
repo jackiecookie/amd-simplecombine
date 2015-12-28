@@ -14,9 +14,12 @@ var removefooterTpl = /}[)];*\s*$/
 var headerTpl = 'define("{{id}}", [{{deps}}], function(require, exports, module){';
 var footerTpl = '});\n';
 
+var isDebug = true;
+
 
 
 module.exports.parseAmdModule = function(moduleurls, option, fn) {
+	isDebug = option.isDebug;
 	var pkg = initpkg(option),
 		bufCache = null;
 	//获得File 
@@ -52,7 +55,7 @@ function BeautifyCode(code) {
 
 //转换成标准的amd模块
 function transFile(file, filePath) {
-	var minify = true;
+	var minify = !isDebug;
 	var code = file.contents.toString();
 	//这里的deps只有require中引用的部分,可能会存在css引用
 	var deps = common.getFileDeps(code, filePath);

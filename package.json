@@ -1,6 +1,6 @@
 {
   "name": "amd-simplecombine",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "amd模块合并",
   "main": "index.js",
   "scripts": {
