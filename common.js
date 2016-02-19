@@ -42,8 +42,14 @@ function getFileDeps(code, fullpath) {
 
 function setFileCssDepsToDeps(code, deps) {
   cssdeps = code.match(getCssDepReg);
+  
+  var configPath = path.resolve(process.cwd(), 'config.js');
+  var globalConfig = require(configPath);
+  var separator=require(join(globalConfig.assets_path, 'rootConfig.js')).comboSyntax[1];
+  
   if (cssdeps != null) {
-    cssdeps[1].split(',').forEach(function(cssdep) {
+	//cssdeps[1].split(',').forEach(function(cssdep) {
+	cssdeps[1].split(separator).forEach(function(cssdep) {
       //去除两边多余的引号和双引号
       cssdep = cssdep.trim()
       cssdep = cssdep.substring(1, cssdep.length - 1);
